@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring REST controller for working with product entity.
@@ -42,8 +44,13 @@ public class ProductsController {
      * @return The product if found, or a 404 not found.
      */
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Product> findById(@PathVariable("id") Integer id) {
+        Optional<Product> productData = productRepository.findById(id.toString());
+        if (productData.isPresent()){
+            return new ResponseEntity<>(productData.get(), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     /**
@@ -51,8 +58,13 @@ public class ProductsController {
      *
      * @return The list of products.
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<?> listProducts() {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    public List<Product> listProducts() {
+        Iterable<Product> productIterable = productRepository.findAll();
+        List<Product> productList = new ArrayList<Product>();
+        for (Product product1 : productIterable){
+            productList.add(product1);
+        }
+        return productList;
     }
 }
