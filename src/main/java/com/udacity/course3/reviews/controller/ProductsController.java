@@ -1,5 +1,7 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.model.Product;
+import com.udacity.course3.reviews.repositories.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 public class ProductsController {
 
     // TODO: Wire JPA repositories here
+    ProductRepository productRepository;
 
     /**
      * Creates a product.
@@ -22,10 +25,14 @@ public class ProductsController {
      * 1. Accept product as argument. Use {@link RequestBody} annotation.
      * 2. Save product.
      */
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/product", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct() {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public void createProduct(@RequestBody Product product) {
+        try {
+            productRepository.save(new Product(product.getProductId(), product.getProductName(), product.getProductAmt(), product.getReviews()));
+        }catch (Exception e){
+            throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+        }
     }
 
     /**
