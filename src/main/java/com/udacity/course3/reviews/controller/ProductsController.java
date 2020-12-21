@@ -27,7 +27,7 @@ public class ProductsController {
      * 1. Accept product as argument. Use {@link RequestBody} annotation.
      * 2. Save product.
      */
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(@RequestBody Product product) {
         try {
@@ -44,7 +44,7 @@ public class ProductsController {
      * @return The product if found, or a 404 not found.
      */
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<Product> findById(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> findById(@PathVariable("id") String id) {
         Optional<Product> productData = productRepository.findById(id.toString());
         if (productData.isPresent()){
             return new ResponseEntity<>(productData.get(), HttpStatus.OK);
