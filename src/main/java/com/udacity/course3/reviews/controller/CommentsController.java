@@ -1,8 +1,9 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.exception.ReviewNotFound;
+import com.udacity.course3.reviews.model.Comment;
 import com.udacity.course3.reviews.repositories.CommentRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class CommentsController {
     // TODO: Wire needed JPA repositories here
     CommentRepository commentRepository;
+    private String existingReview;
 
     /**
      * Creates a comment for a review.
@@ -28,8 +30,13 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
-    public ResponseEntity<?> createCommentForReview(@PathVariable("reviewId") Integer reviewId) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public Comment createCommentForReview(@RequestBody Comment comment, @PathVariable("reviewId") Integer reviewId) throws ReviewNotFound{
+        existingReview = commentRepository.findReviewById(reviewId.toString());
+        if (existingReview == null){
+            throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
+        }
+
+        return commentRepository.save(comment);
     }
 
     /**
