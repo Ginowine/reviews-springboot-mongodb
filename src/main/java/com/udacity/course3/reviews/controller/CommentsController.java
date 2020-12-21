@@ -2,12 +2,13 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.exception.ReviewNotFound;
 import com.udacity.course3.reviews.model.Comment;
+import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.CommentRepository;
-import org.springframework.http.HttpStatus;
+import com.udacity.course3.reviews.repositories.ReviewRepository;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring REST controller for working with comment entity.
@@ -17,7 +18,8 @@ import java.util.List;
 public class CommentsController {
     // TODO: Wire needed JPA repositories here
     CommentRepository commentRepository;
-    private String existingReview;
+    ReviewRepository reviewRepository;
+    private Optional<Review> existingReviewId;
 
     /**
      * Creates a comment for a review.
@@ -30,13 +32,15 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
-    public Comment createCommentForReview(@RequestBody Comment comment, @PathVariable("reviewId") Integer reviewId) throws ReviewNotFound{
-        existingReview = commentRepository.findReviewById(reviewId.toString());
-        if (existingReview == null){
-            throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
-        }
+    public Comment createCommentForReview(@RequestBody Comment comment, @PathVariable("reviewId") String reviewId) throws ReviewNotFound{
+        existingReviewId = reviewRepository.findById(reviewId);
 
-        return commentRepository.save(comment);
+    //.findReviewById(reviewId.toString());
+        if (!existingReviewId.isPresent()){
+            throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
+        }else {
+            return commentRepository.save(comment);
+        }
     }
 
     /**
@@ -49,7 +53,12 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.GET)
-    public List<?> listCommentsForReview(@PathVariable("reviewId") Integer reviewId) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public List<Comment> listCommentsForReview(@PathVariable("reviewId") String reviewId) throws ReviewNotFound{
+        existingReviewId = reviewRepository.findById(reviewId);
+        if (!existingReviewId.isPresent()){
+            throw new ReviewNotFound("ERROR: NOT_FOUND");
+        }else {
+            return commentRepository.findCommentsByReviewId(reviewId);
+        }
     }
 }
