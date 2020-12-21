@@ -34,8 +34,6 @@ public class CommentsController {
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
     public Comment createCommentForReview(@RequestBody Comment comment, @PathVariable("reviewId") String reviewId) throws ReviewNotFound{
         existingReviewId = reviewRepository.findById(reviewId);
-
-    //.findReviewById(reviewId.toString());
         if (!existingReviewId.isPresent()){
             throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
         }else {
