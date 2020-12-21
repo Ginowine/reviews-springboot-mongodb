@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/comments")
 public class CommentsController {
-
     // TODO: Wire needed JPA repositories here
     CommentRepository commentRepository;
 
