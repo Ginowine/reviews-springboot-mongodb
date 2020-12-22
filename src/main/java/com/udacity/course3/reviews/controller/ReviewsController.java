@@ -5,10 +5,7 @@ import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
 import com.udacity.course3.reviews.repositories.ReviewRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +49,12 @@ public class ReviewsController {
      * @return The list of reviews.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.GET)
-    public ResponseEntity<List<?>> listReviewsForProduct(@PathVariable("productId") Integer productId) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public List<Review> listReviewsForProduct(@PathVariable("productId") String productId) throws ProductNotFound{
+        existingProduct = productRepository.findById(productId);
+        if (!existingProduct.isPresent()){
+            throw new ProductNotFound("ERROR: NOT_FOUND");
+        }else {
+            return reviewRepository.findReviewsByProductId(productId);
+        }
     }
 }
