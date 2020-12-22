@@ -5,6 +5,7 @@ import com.udacity.course3.reviews.model.Comment;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.CommentRepository;
 import com.udacity.course3.reviews.repositories.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,12 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentsController {
     // TODO: Wire needed JPA repositories here
-    CommentRepository commentRepository;
-    ReviewRepository reviewRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     private Optional<Review> existingReviewId;
 
     /**

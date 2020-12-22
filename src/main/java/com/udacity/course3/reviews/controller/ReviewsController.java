@@ -5,6 +5,7 @@ import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
 import com.udacity.course3.reviews.repositories.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,11 @@ import java.util.Optional;
 public class ReviewsController {
 
     // TODO: Wire JPA repositories here
-    ProductRepository productRepository;
-    ReviewRepository reviewRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     private Optional<Product> existingProduct;
 
     /**

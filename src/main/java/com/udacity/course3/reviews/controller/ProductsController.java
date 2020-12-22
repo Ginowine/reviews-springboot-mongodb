@@ -2,6 +2,7 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.repositories.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,8 @@ import java.util.Optional;
 public class ProductsController {
 
     // TODO: Wire JPA repositories here
-    ProductRepository productRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     /**
      * Creates a product.
