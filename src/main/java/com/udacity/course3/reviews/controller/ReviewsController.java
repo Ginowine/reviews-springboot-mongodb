@@ -17,8 +17,8 @@ import java.util.Optional;
 public class ReviewsController {
 
     // TODO: Wire JPA repositories here
-    private ProductRepository productRepository;
-    private ReviewRepository reviewRepository;
+    ProductRepository productRepository;
+    ReviewRepository reviewRepository;
     private Optional<Product> existingProduct;
 
     /**
