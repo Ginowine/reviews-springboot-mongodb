@@ -45,7 +45,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id) {
-        Optional<Product> productData = productRepository.findById(id.toString());
+        Optional<Product> productData = productRepository.findById(id);
         if (productData.isPresent()){
             return new ResponseEntity<>(productData.get(), HttpStatus.OK);
         }else {

@@ -1,11 +1,17 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.exception.ProductNotFound;
+import com.udacity.course3.reviews.model.Product;
+import com.udacity.course3.reviews.model.Review;
+import com.udacity.course3.reviews.repositories.ProductRepository;
+import com.udacity.course3.reviews.repositories.ReviewRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring REST controller for working with review entity.
@@ -14,6 +20,9 @@ import java.util.List;
 public class ReviewsController {
 
     // TODO: Wire JPA repositories here
+    private ProductRepository productRepository;
+    private ReviewRepository reviewRepository;
+    private Optional<Product> existingProduct;
 
     /**
      * Creates a review for a product.
@@ -27,8 +36,13 @@ public class ReviewsController {
      * @return The created review or 404 if product id is not found.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.POST)
-    public ResponseEntity<?> createReviewForProduct(@PathVariable("productId") Integer productId) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public Review createReviewForProduct(@RequestBody Review review, @PathVariable("productId") String productId) throws ProductNotFound {
+        existingProduct = productRepository.findById(productId);
+        if (!existingProduct.isPresent()){
+            throw new ProductNotFound("ERROR: NOT_FOUND");
+        }else {
+            return reviewRepository.save(review);
+        }
     }
 
     /**
