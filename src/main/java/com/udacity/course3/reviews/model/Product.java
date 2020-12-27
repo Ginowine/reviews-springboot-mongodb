@@ -1,12 +1,9 @@
 package com.udacity.course3.reviews.model;
 
-import org.bson.types.ObjectId;
-
 import java.util.List;
 
 public class Product {
 
-    private ObjectId id;
     private Double productId;
     private String productName;
     private double productAmt;
@@ -33,7 +30,6 @@ public class Product {
         //return String.format("Product[id=%s, productName='%s', productAmt='%s']", id, productName, productAmt);
 
         final StringBuffer sb = new StringBuffer("Product{");
-        sb.append("id=").append(id);
         sb.append(", productId=").append(productId);
         sb.append(", productName=").append(productName);
         sb.append(", productAmt=").append(productAmt);
@@ -57,14 +53,6 @@ public class Product {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public String getProductName() {
