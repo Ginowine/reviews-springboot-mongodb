@@ -33,7 +33,7 @@ public class ProductsController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(@RequestBody Product product) {
         try {
-            productRepository.save(new Product(product.getProductId(), product.getProductName(), product.getProductAmt(), product.getReviews()));
+            productRepository.save(new Product(product.getProductId(), product.getProductName(), product.getProductAmt()));
         }catch (Exception e){
             throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
         }
