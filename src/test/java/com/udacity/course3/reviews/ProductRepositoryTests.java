@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -38,5 +40,11 @@ public class ProductRepositoryTests {
         LOG.info("There are " + allProduct.size() + " product(s) in database");
         assertThat(allProduct.size(), equalTo(4));
         assertNotNull(productRepository.findAll());
+    }
+
+    @Test
+    public void findById(){
+        Optional<Product> productList = productRepository.findById("1.0");
+        assertThat(productList, hasSize(1));
     }
 }
