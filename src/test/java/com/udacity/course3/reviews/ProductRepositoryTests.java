@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +27,10 @@ public class ProductRepositoryTests {
 
     @BeforeEach
     public void dataSetup(){
-        product = new Product(1.0, "Sugar", 23.5);
-        product = new Product(2.0, "Milk", 73.5);
-        product = new Product(3.0, "Rice", 33.5);
-        product = new Product(4.0, "Fish", 93.5);
+        product = new Product();
+        product.setProductId(1.0);
+        product.setProductName("SamsungTV");
+        product.setProductAmt(54.4);
 
         productRepository.save(product);
     }
@@ -39,12 +40,13 @@ public class ProductRepositoryTests {
         List<Product> allProduct = productRepository.findAll();
         LOG.info("There are " + allProduct.size() + " product(s) in database");
         assertThat(allProduct.size(), equalTo(4));
-        assertNotNull(productRepository.findAll());
+        assertNotNull(allProduct);
     }
 
     @Test
     public void findById(){
         Optional<Product> productList = productRepository.findById("1.0");
         assertThat(productList, hasSize(1));
+        assertThat(productList.get().getProductId()).isNotNull();
     }
 }
