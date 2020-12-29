@@ -27,10 +27,10 @@ public class ProductRepositoryTests {
 
     @BeforeEach
     public void dataSetup(){
-        product = new Product();
-        product.setProductId(1.0);
-        product.setProductName("SamsungTV");
-        product.setProductAmt(54.4);
+        product = new Product(1.0, "Sugar", 23.5);
+        product = new Product(2.0, "Milk", 73.5);
+        product = new Product(3.0, "Rice", 33.5);
+        product = new Product(4.0, "Fish", 93.5);
 
         productRepository.save(product);
     }
