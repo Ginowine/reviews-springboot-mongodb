@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Product {
 
-    private Double productId;
+    private String productId;
     private String productName;
     private double productAmt;
     private List<Review> reviews;
@@ -12,13 +12,13 @@ public class Product {
     public Product(){
 
     }
-    public Product(Double productId, String productName, double productAmt){
+    public Product(String productId, String productName, double productAmt){
         this.productId = productId;
         this.productName = productName;
         this.productAmt = productAmt;
     }
 
-    public Product(Double productId, String productName, double productAmount, List<Review> reviews) {
+    public Product(String productId, String productName, double productAmount, List<Review> reviews) {
         this.productId = productId;
         this.productName = productName;
         this.productAmt = productAmount;
@@ -39,11 +39,11 @@ public class Product {
         return sb.toString();
     }
 
-    public Double getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Double productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

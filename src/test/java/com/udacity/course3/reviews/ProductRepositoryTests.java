@@ -16,6 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
 public class ProductRepositoryTests {
@@ -23,16 +24,12 @@ public class ProductRepositoryTests {
     @Autowired
     private ProductRepository productRepository;
 
-    Product product;
-
-    @BeforeEach
-    public void dataSetup(){
-        product = new Product(1.0, "Sugar", 23.5);
-        product = new Product(2.0, "Milk", 73.5);
-        product = new Product(3.0, "Rice", 33.5);
-        product = new Product(4.0, "Fish", 93.5);
-
-        productRepository.save(product);
+    @Test
+    public void createProductTest(){
+        Product product = productRepository.save(new Product("1.0", "Snickers", 243.45));
+        assertThat(product).hasFieldOrPropertyWithValue("productId", "1.0");
+        assertThat(product).hasFieldOrPropertyWithValue("productName", "Snickers");
+        assertThat(product).hasFieldOrPropertyWithValue("productAmt", 243.45);
     }
 
     @Test
@@ -45,8 +42,10 @@ public class ProductRepositoryTests {
 
     @Test
     public void findById(){
-        Optional<Product> productList = productRepository.findById("1.0");
-        assertThat(productList, hasSize(1));
-        assertThat(productList.get().getProductId()).isNotNull();
+        Product productList = productRepository.findById(product.getProductId()).get();
+        assertThat(productList).isEqualTo(
+
+                hasSize(1));
+        assertThat(productList.getProductId()).isNotNull();
     }
 }
