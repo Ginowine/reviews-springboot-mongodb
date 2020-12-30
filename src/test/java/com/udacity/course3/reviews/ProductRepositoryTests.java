@@ -34,9 +34,14 @@ public class ProductRepositoryTests {
 
     @Test
     public void getAllProduct(){
+        Product product1 = productRepository.save(new Product("1.0", "Jeans Jacket", 100.2));
+        Product product2 = productRepository.save(new Product("2.0", "Refrigerator", 280.2));
+        Product product3 = productRepository.save(new Product("3.0", "Sweat Pants", 156.2));
+
         List<Product> allProduct = productRepository.findAll();
         LOG.info("There are " + allProduct.size() + " product(s) in database");
         assertThat(allProduct.size(), equalTo(4));
+        assertThat(allProduct).contains(product1, product2, product3);
         assertNotNull(allProduct);
     }
 
