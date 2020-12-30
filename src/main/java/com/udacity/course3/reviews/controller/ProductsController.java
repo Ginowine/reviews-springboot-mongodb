@@ -70,6 +70,12 @@ public class ProductsController {
         return productList;
     }
 
+    /**
+     * select products by name.
+     *
+     * @return The list of products.
+     */
+
     @RequestMapping(value = "/name", method = RequestMethod.GET)
     public List<Product> searchByProductName(@PathVariable("productName") String productName){
         Iterable<Product> products = productRepository.findProductsByProductName(productName);
