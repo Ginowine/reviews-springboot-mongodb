@@ -51,4 +51,9 @@ public class ProductRepositoryTests {
         assertThat(product.getProductId()).isNotNull();
         assertThat(product.getProductId()).contains("2.0");
     }
+
+    @Test
+    public void findProductByName(){
+
+    }
 }
