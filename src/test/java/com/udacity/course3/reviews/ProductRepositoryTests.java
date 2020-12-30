@@ -54,6 +54,13 @@ public class ProductRepositoryTests {
 
     @Test
     public void findProductByName(){
+        Product product1 = productRepository.save(new Product("1.0", "Jeans Jacket", 100.2));
+        Product product2 = productRepository.save(new Product("2.0", "Cooker", 150.2));
+        Product product3 = productRepository.save(new Product("3.0", "Cooker Bar", 118.2));
 
+
+        List<Product> productList = productRepository.findProductsByProductName("Cooker");
+        assertThat(productList).hasSize(2);
+        assertThat(productList).contains(product2, product3);
     }
 }
