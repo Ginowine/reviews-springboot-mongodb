@@ -69,4 +69,14 @@ public class ProductsController {
         }
         return productList;
     }
+
+    @RequestMapping(value = "/name", method = RequestMethod.GET)
+    public List<Product> searchByProductName(@PathVariable("productName") String productName){
+        Iterable<Product> products = productRepository.findProductsByProductName(productName);
+        List<Product> listOfProducts = new ArrayList<>();
+        for (Product product : products){
+            listOfProducts.add(product);
+        }
+        return listOfProducts;
+    }
 }
