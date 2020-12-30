@@ -3,20 +3,16 @@ package com.udacity.course3.reviews;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.repositories.ProductRepository;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
 public class ProductRepositoryTests {
@@ -47,10 +43,12 @@ public class ProductRepositoryTests {
 
     @Test
     public void findById(){
-        Product productList = productRepository.findById(product.getProductId()).get();
-        assertThat(productList).isEqualTo(
+        Product product1 = productRepository.save(new Product("1.0", "Jeans Jacket", 100.2));
+        Product product2 = productRepository.save(new Product("2.0", "Face Cap", 20.2));
 
-                hasSize(1));
-        assertThat(productList.getProductId()).isNotNull();
+        Product product = productRepository.findById(product2.getProductId()).get();
+        assertThat(product).isEqualTo(product2);
+        assertThat(product.getProductId()).isNotNull();
+        assertThat(product.getProductId()).contains("2.0");
     }
 }
