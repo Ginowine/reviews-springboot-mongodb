@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
@@ -21,6 +23,7 @@ public class ReviewRepositoryTests {
         assertThat(review).hasFieldOrPropertyWithValue("reviewerName", "Gino Wine");
     }
 
+    @Test
     public void findReviewsById(){
         Review review1 = reviewRepository.save(new Review("1", "Gino Wine", "really great product", "Customer", "12/98/98", "1.0"));
         Review review2 = reviewRepository.save(new Review("2", "Brown", "really bad product", "Mr.", "15/98/98", "2.0"));
@@ -29,5 +32,17 @@ public class ReviewRepositoryTests {
         assertThat(review).isEqualTo(review2);
         assertThat(review.getId()).isNotNull();
         assertThat(review.getId()).contains("2");
+    }
+
+    @Test
+    public void findReviewByProductId(){
+        Review review1 = reviewRepository.save(new Review("1", "Gino Wine", "really great product", "Customer", "12/98/98", "1.0"));
+        Review review2 = reviewRepository.save(new Review("2", "Brown", "really bad product", "Mr.", "15/98/98", "2.0"));
+        Review review3 = reviewRepository.save(new Review("3", "Eghosa", "great product", "Mr", "15/98/98", "1.0"));
+        Review review4 = reviewRepository.save(new Review("4", "Eseosa", " product", "Mr.", "15/98/98", "1.0"));
+
+        List<Review> review = reviewRepository.findReviewsByProductId(review1.getProductId());
+
+
     }
 }
