@@ -16,9 +16,15 @@ public class ReviewRepositoryTests {
 
     @Test
     public void createReviewTest(){
-        Review review = reviewRepository.save(new Review(1, "Gino Wine", "reall great product", "Customer", "12/98/98", "1.0"));
-
+        Review review = reviewRepository.save(new Review(1, "Gino Wine", "really great product", "Customer", "12/98/98", "1.0"));
         assertThat(review).hasFieldOrPropertyWithValue("productId", "1.0");
+        assertThat(review).hasFieldOrPropertyWithValue("reviewerName", "Gino Wine");
+    }
+
+    public void findReviewsById(){
+        Review review1 = reviewRepository.save(new Review(1, "Gino Wine", "really great product", "Customer", "12/98/98", "1.0"));
+        Review review2 = reviewRepository.save(new Review(2, "Brown", "really bad product", "Mr.", "15/98/98", "2.0"));
+
 
     }
 }
