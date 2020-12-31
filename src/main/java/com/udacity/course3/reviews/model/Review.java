@@ -3,7 +3,7 @@ package com.udacity.course3.reviews.model;
 import java.util.List;
 
 public class Review {
-    private int id;
+    private String id;
     private String reviewerName;
     private String reviewerDescription;
     private String reviewerTitle;
@@ -11,7 +11,7 @@ public class Review {
     private String productId;
     private List<Comment> comments;
 
-    public Review(int id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, String productId) {
+    public Review(String id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, String productId) {
         this.id = id;
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
@@ -48,11 +48,11 @@ public class Review {
         this.comments = comments;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
