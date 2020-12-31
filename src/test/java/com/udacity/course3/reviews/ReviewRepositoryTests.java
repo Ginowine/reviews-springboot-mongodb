@@ -42,7 +42,8 @@ public class ReviewRepositoryTests {
         Review review4 = reviewRepository.save(new Review("4", "Eseosa", " product", "Mr.", "15/98/98", "1.0"));
 
         List<Review> review = reviewRepository.findReviewsByProductId(review1.getProductId());
-
-
+        assertThat(review.size()).isNotNull();
+        assertThat(review.get(1).getId()).isNotNull();
+        assertThat(review.get(1).getId()).contains("1");
     }
 }
