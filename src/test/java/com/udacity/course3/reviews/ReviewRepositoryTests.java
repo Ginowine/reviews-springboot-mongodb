@@ -24,7 +24,7 @@ public class ReviewRepositoryTests {
     }
 
     @Test
-    public void findReviewsById(){
+    public void findReviewById(){
         Review review1 = reviewRepository.save(new Review("1", "Gino Wine", "really great product", "Customer", "12/98/98", "1.0"));
         Review review2 = reviewRepository.save(new Review("2", "Brown", "really bad product", "Mr.", "15/98/98", "2.0"));
 
@@ -35,7 +35,7 @@ public class ReviewRepositoryTests {
     }
 
     @Test
-    public void findReviewByProductId(){
+    public void findReviewsByProductId(){
         Review review1 = reviewRepository.save(new Review("1", "Gino Wine", "really great product", "Customer", "12/98/98", "1.0"));
         Review review2 = reviewRepository.save(new Review("2", "Brown", "really bad product", "Mr.", "15/98/98", "2.0"));
         Review review3 = reviewRepository.save(new Review("3", "Eghosa", "great product", "Mr", "15/98/98", "1.0"));
