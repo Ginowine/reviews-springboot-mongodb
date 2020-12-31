@@ -1,11 +1,9 @@
 package com.udacity.course3.reviews.model;
 
-import org.bson.types.ObjectId;
-
 import java.util.List;
 
 public class Review {
-    private ObjectId id;
+    private int id;
     private String reviewerName;
     private String reviewerDescription;
     private String reviewerTitle;
@@ -13,7 +11,7 @@ public class Review {
     private String productId;
     private List<Comment> comments;
 
-    public Review(ObjectId id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, String productId) {
+    public Review(int id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, String productId) {
         this.id = id;
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
@@ -50,11 +48,11 @@ public class Review {
         this.comments = comments;
     }
 
-    public ObjectId getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(int id) {
         this.id = id;
     }
 
