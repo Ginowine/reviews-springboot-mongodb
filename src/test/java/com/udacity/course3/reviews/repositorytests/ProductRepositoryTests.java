@@ -1,4 +1,4 @@
-package com.udacity.course3.reviews;
+package com.udacity.course3.reviews.repositorytests;
 
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.repositories.ProductRepository;
