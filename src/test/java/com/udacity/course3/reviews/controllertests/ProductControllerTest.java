@@ -29,7 +29,7 @@ public class ProductControllerTest {
     ProductRepository productRepository;
 
     @Test
-    public void getAllProducts() throws Exception{
+    public void getAllProductsTest() throws Exception{
         Product product1 = productRepository.save(new Product("1.0", "Jeans Jacket", 100.2));
         Product product2 = productRepository.save(new Product("2.0", "Refrigerator", 280.2));
         Product product3 = productRepository.save(new Product("3.0", "Sweat Pants", 156.2));
@@ -44,4 +44,13 @@ public class ProductControllerTest {
                 .andExpect((ResultMatcher) jsonPath("$[0].productName", is(product1.getProductName())));
 
     }
+
+    @Test
+    public void createProductTest() throws Exception{
+        Product product = new Product();
+        Product product1 = productRepository.save(new Product(product.getProductId(), product.getProductName(), product.getProductAmt()));
+
+    }
+
+
 }
