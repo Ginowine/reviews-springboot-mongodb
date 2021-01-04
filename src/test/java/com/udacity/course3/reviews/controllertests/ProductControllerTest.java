@@ -10,13 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -53,10 +53,13 @@ public class ProductControllerTest {
         product.setProductName("Refrigerator");
         product.setProductAmt(23.4);
 
-        List<Product> productList = new ArrayList<Product>();
-        productList.add(product);
+        given(productRepository.save(product)).willReturn(product);
 
-        given(productRepository.save(product)).willReturn((Product) productList);
+        mvc.perform(post("/create")
+        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect((ResultMatcher) jsonPath("$.productId", product.getProductId()))
+                .andExpect((ResultMatcher) jsonPath("$.productName", is(product.getProductName())));
     }
 
 
