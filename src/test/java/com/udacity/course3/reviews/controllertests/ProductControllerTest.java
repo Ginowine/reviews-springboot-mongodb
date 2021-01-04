@@ -42,7 +42,8 @@ public class ProductControllerTest {
         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect((ResultMatcher) jsonPath("$[0].productId", is(product1.getProductId())))
-                .andExpect((ResultMatcher) jsonPath("$[0].productName", is(product1.getProductName())));
+                .andExpect((ResultMatcher) jsonPath("$[0].productName", is(product1.getProductName())))
+        .andExpect(jsonPath("$.products").exists());
 
     }
 
