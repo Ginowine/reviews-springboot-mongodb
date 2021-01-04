@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,8 +49,14 @@ public class ProductControllerTest {
     @Test
     public void createProductTest() throws Exception{
         Product product = new Product();
-        Product product1 = productRepository.save(new Product(product.getProductId(), product.getProductName(), product.getProductAmt()));
+        product.setProductId("1.0");
+        product.setProductName("Refrigerator");
+        product.setProductAmt(23.4);
 
+        List<Product> productList = new ArrayList<Product>();
+        productList.add(product);
+
+        given(productRepository.save(product)).willReturn((Product) productList);
     }
 
 
