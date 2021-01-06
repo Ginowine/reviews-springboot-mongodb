@@ -1,11 +1,18 @@
 package com.udacity.course3.reviews.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 public class Product {
 
     private String productId;
     private String productName;
     private double productAmt;
-    private Review reviews;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id", referencedColumnName = "id")
+    private Review review;
 
     public Product(){
 
@@ -16,11 +23,11 @@ public class Product {
         this.productAmt = productAmt;
     }
 
-    public Product(String productId, String productName, double productAmount, Review reviews) {
+    public Product(String productId, String productName, double productAmount, Review review) {
         this.productId = productId;
         this.productName = productName;
         this.productAmt = productAmount;
-        this.reviews = reviews;
+        this.review = review;
     }
 
     @Override
@@ -31,7 +38,7 @@ public class Product {
         sb.append(", productId=").append(productId);
         sb.append(", productName=").append(productName);
         sb.append(", productAmt=").append(productAmt);
-        sb.append(", reviews=").append(reviews);
+        sb.append(", reviews=").append(review);
         sb.append('}');
 
         return sb.toString();
@@ -46,11 +53,11 @@ public class Product {
     }
 
     public Review getReviews() {
-        return reviews;
+        return review;
     }
 
-    public void setReviews(Review reviews) {
-        this.reviews = reviews;
+    public void setReviews(Review review) {
+        this.review = review;
     }
 
     public String getProductName() {

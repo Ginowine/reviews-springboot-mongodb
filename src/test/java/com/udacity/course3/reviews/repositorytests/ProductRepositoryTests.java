@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.repositorytests;
 
 import com.udacity.course3.reviews.model.Product;
+import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,20 @@ public class ProductRepositoryTests {
 
     @Test
     public void createProductTest(){
-        Product product = productRepository.save(new Product("1.0", "Snickers", 243.45));
+        Product product = new Product();
+        product.setProductId("1.0");
+        product.setProductName("Laptop");
+        product.setProductAmt(23.5);
+        //product.se
+
+
+        Review review = new Review();
+        Product product = new Product();
+        review.setId("1.0");
+        review.setProductId();
+
+
+        Product product = productRepository.save(new Product("1.0", "Snickers", 243.45, ));
         assertThat(product).hasFieldOrPropertyWithValue("productId", "1.0");
         assertThat(product).hasFieldOrPropertyWithValue("productName", "Snickers");
         assertThat(product).hasFieldOrPropertyWithValue("productAmt", 243.45);
