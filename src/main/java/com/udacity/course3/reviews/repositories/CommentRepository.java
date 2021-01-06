@@ -5,8 +5,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface CommentRepository extends MongoRepository<Comment, String>{
+public interface CommentRepository extends MongoRepository<Comment, Long>{
     //String findReviewById(String id);
-    List<Comment> findCommentsByReviewId(String reviewId);
+    List<Comment> findCommentsByReviewId(Long reviewId);
 
 }

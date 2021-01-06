@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -18,10 +19,9 @@ public class Product {
     @Column
     private double productAmt;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "review_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Review review;
+    private List<Review> review;
 
     public Product(){
 
@@ -32,7 +32,7 @@ public class Product {
         this.productAmt = productAmt;
     }
 
-    public Product(String productId, String productName, double productAmount, Review review) {
+    public Product(String productId, String productName, double productAmount, List<Review> review) {
         this.productId = productId;
         this.productName = productName;
         this.productAmt = productAmount;
@@ -61,11 +61,11 @@ public class Product {
         this.productId = productId;
     }
 
-    public Review getReviews() {
+    public List<Review> getReviews() {
         return review;
     }
 
-    public void setReviews(Review review) {
+    public void setReviews(List<Review> review) {
         this.review = review;
     }
 

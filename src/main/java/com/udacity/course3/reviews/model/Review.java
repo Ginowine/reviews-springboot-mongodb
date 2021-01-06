@@ -22,24 +22,23 @@ public class Review {
     @Column
     private String createdDate;
 
-    @OneToOne(mappedBy = "product")
+    @ManyToOne
     @JsonProperty
     private Product product;
-
-    private String productId;
 
     @ManyToMany
     @JsonProperty
     @Column
     private List<Comment> comments;
 
-    public Review(String id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, String productId) {
+    public Review(String id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, Product product, List<Comment> comments) {
         this.id = id;
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;
         this.createdDate = date;
-        this.productId = productId;
+        this.product = product;
+        this.comments = comments;
     }
 
     public Review(){
@@ -55,7 +54,6 @@ public class Review {
         sb.append(", reviewerDescription=").append(reviewerDescription);
         sb.append(", reviewerTitle=").append(reviewerTitle);
         sb.append(", createdDate=").append(createdDate);
-        sb.append(", productId=").append(productId);
         sb.append(", comments").append(comments);
         sb.append('}');
 
@@ -108,13 +106,5 @@ public class Review {
 
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 }
