@@ -1,22 +1,26 @@
 package com.udacity.course3.reviews.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product")
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty
     private String productId;
+
+    @Column
     private String productName;
+
+    @Column
     private double productAmt;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "review_id", referencedColumnName = "id")
+    @JsonIgnore
     private Review review;
 
     public Product(){

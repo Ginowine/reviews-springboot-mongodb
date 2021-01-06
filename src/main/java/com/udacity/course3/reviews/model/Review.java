@@ -1,14 +1,36 @@
 package com.udacity.course3.reviews.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Review {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty
+    @Column
     private String id;
+
+    @Column
     private String reviewerName;
+    @Column
     private String reviewerDescription;
+    @Column
     private String reviewerTitle;
+    @Column
     private String createdDate;
+
+    @OneToOne(mappedBy = "product")
+    @JsonProperty
+    private Product product;
+
     private String productId;
+
+    @ManyToMany
+    @JsonProperty
+    @Column
     private List<Comment> comments;
 
     public Review(String id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, String productId) {
