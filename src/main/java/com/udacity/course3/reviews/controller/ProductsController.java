@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Spring REST controller for working with product entity.
@@ -56,13 +55,15 @@ public class ProductsController {
      * @return The product if found, or a 404 not found.
      */
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") String id) {
-        Optional<Product> productData = productRepository.findById(id);
-        if (productData.isPresent()){
-            return new ResponseEntity<>(productData.get(), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Product> findById(@PathVariable("id") String id) {
+        return ResponseEntity.of(productRepository.findById(id));
+
+//        Optional<Product> productData = productRepository.findById(id);
+//        if (productData.isPresent()){
+//            return new ResponseEntity<>(productData.get(), HttpStatus.OK);
+//        }else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
     }
 
     /**
