@@ -3,6 +3,7 @@ package com.udacity.course3.reviews.repositorytests;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
+import com.udacity.course3.reviews.repositories.ReviewRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
@@ -20,6 +21,8 @@ public class ProductRepositoryTests {
     private static final Logger LOG = Logger.getLogger(ProductRepositoryTests.class.getName());
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
 
     @Test
     public void createProductTest(){
@@ -28,18 +31,14 @@ public class ProductRepositoryTests {
         product.setProductName("Laptop");
         product.setProductAmt(23.5);
         //product.se
-
-
         Review review = new Review();
-        Product product = new Product();
-        review.setId("1.0");
-        review.setProductId();
+        reviewRepository.save(review);
+        product.setReviews(review);
+        productRepository.save(product);
 
-
-        Product product = productRepository.save(new Product("1.0", "Snickers", 243.45, ));
         assertThat(product).hasFieldOrPropertyWithValue("productId", "1.0");
-        assertThat(product).hasFieldOrPropertyWithValue("productName", "Snickers");
-        assertThat(product).hasFieldOrPropertyWithValue("productAmt", 243.45);
+        assertThat(product).hasFieldOrPropertyWithValue("productName", "Laptop");
+        assertThat(product).hasFieldOrPropertyWithValue("productAmt", 23.5);
     }
 
     @Test
@@ -50,7 +49,7 @@ public class ProductRepositoryTests {
 
         List<Product> allProduct = productRepository.findAll();
         LOG.info("There are " + allProduct.size() + " product(s) in database");
-        assertThat(allProduct.size(), equalTo(4));
+        assertThat(allProduct.size(), equalTo(3));
         assertThat(allProduct).contains(product1, product2, product3);
         assertNotNull(allProduct);
     }
