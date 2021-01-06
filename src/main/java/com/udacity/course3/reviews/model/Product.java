@@ -1,13 +1,11 @@
 package com.udacity.course3.reviews.model;
 
-import java.util.List;
-
 public class Product {
 
     private String productId;
     private String productName;
     private double productAmt;
-    private List<Review> reviews;
+    private Review reviews;
 
     public Product(){
 
@@ -18,7 +16,7 @@ public class Product {
         this.productAmt = productAmt;
     }
 
-    public Product(String productId, String productName, double productAmount, List<Review> reviews) {
+    public Product(String productId, String productName, double productAmount, Review reviews) {
         this.productId = productId;
         this.productName = productName;
         this.productAmt = productAmount;
@@ -47,11 +45,11 @@ public class Product {
         this.productId = productId;
     }
 
-    public List<Review> getReviews() {
+    public Review getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(Review reviews) {
         this.reviews = reviews;
     }
 

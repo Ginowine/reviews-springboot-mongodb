@@ -1,12 +1,13 @@
 package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.model.Product;
+import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
+import com.udacity.course3.reviews.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class ProductsController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ReviewRepository reviewRepository;
+
     /**
      * Creates a product.
      *
@@ -31,12 +35,18 @@ public class ProductsController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@RequestBody Product product) {
-        try {
-            productRepository.save(new Product(product.getProductId(), product.getProductName(), product.getProductAmt()));
-        }catch (Exception e){
-            throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
-        }
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        Product product1 = new Product();
+        product1.setProductId(product.getProductId());
+        product1.setProductName(product.getProductName());
+        product1.setProductAmt(product.getProductAmt());
+        Review review = new Review();
+        reviewRepository.save(review);
+
+        product1.setReviews(review);
+        productRepository.save(product1);
+        return ResponseEntity.ok(product1);
+
     }
 
     /**
