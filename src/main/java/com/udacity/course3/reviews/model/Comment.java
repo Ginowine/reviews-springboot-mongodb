@@ -17,8 +17,7 @@ public class Comment {
     @ManyToOne
     private Review review;
 
-    public Comment(Long id, String test, String createdTime, String reviewId, Review review) {
-        this.id = id;
+    public Comment(String test, String createdTime, String reviewId, Review review) {
         this.test = test;
         this.createdTime = createdTime;
         this.reviewId = reviewId;

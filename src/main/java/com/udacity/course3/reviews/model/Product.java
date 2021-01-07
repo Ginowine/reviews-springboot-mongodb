@@ -19,14 +19,12 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> review;
 
-    public Product(String productId, String productName, double productAmt){
-        this.productId = productId;
+    public Product(String productName, double productAmt){
         this.productName = productName;
         this.productAmt = productAmt;
     }
 
-    public Product(String productId, String productName, double productAmount, List<Review> review) {
-        this.productId = productId;
+    public Product(String productName, double productAmount, List<Review> review) {
         this.productName = productName;
         this.productAmt = productAmount;
         this.review = review;

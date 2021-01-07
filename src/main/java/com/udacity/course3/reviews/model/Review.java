@@ -26,7 +26,7 @@ public class Review {
     @OneToMany
     private List<Comment> comments;
 
-    public Review(String id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, Product product, List<Comment> comments) {
+    public Review(String reviewerName, String reviewerDescription, String reviewerTitle, String date, Product product, List<Comment> comments) {
         this.id = id;
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
