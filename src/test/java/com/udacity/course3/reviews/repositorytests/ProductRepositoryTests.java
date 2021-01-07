@@ -14,8 +14,7 @@ import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 @DataMongoTest
 public class ProductRepositoryTests {
@@ -27,6 +26,33 @@ public class ProductRepositoryTests {
 
     @Before
     public void setUp() throws Exception {
+        Product product1 = new Product();
+        product1.setProductId("1.0");
+        product1.setProductName("Laptop");
+        product1.setProductAmt(23.5);
+
+        Product product2 = new Product();
+        product2.setProductId("2.0");
+        product2.setProductName("Gas");
+        product2.setProductAmt(65.5);
+
+        Product product3 = new Product();
+        product3.setProductId("3.0");
+        product3.setProductName("Fridge");
+        product3.setProductAmt(84.5);
+
+        assertNull(product1.getProductId());
+        assertNull(product2.getProductId());
+        assertNull(product3.getProductId());
+
+        this.productRepository.save(product1);
+        this.productRepository.save(product2);
+        this.productRepository.save(product3);
+
+        assertNotNull(product1.getProductId());
+        assertNotNull(product2.getProductId());
+        assertNotNull(product3.getProductId());
+
 
     }
 
