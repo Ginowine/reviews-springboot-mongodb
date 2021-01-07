@@ -1,10 +1,11 @@
 package com.udacity.course3.reviews.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
-@Entity
+@Document(collection = "comments")
 public class Comment {
 
     @Id
