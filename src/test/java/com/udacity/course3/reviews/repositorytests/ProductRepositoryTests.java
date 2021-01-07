@@ -1,5 +1,6 @@
 package com.udacity.course3.reviews.repositorytests;
 
+import com.udacity.course3.reviews.model.Comment;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
@@ -26,6 +27,16 @@ public class ProductRepositoryTests {
 
     @Before
     public void setUp() throws Exception {
+        Comment comment = new Comment();
+        comment.se
+
+        Review review = new Review();
+        review.setReviewerName("Gino Winw");
+        review.setReviewerTitle("Mr");
+        review.setReviewerDescription("Product is great");
+        review.setCreatedDate("23/12/02");
+        review.se
+
         Product product1 = new Product();
         product1.setProductId("1.0");
         product1.setProductName("Laptop");
