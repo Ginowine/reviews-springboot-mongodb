@@ -2,10 +2,7 @@ package com.udacity.course3.reviews.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Comment {
@@ -18,11 +15,17 @@ public class Comment {
     private String createdTime;
     private String reviewId;
 
-    public Comment(Long id, String test, String createdTime, String reviewId) {
+    @ManyToOne
+    @JsonProperty
+    @Column
+    private Review review;
+
+    public Comment(Long id, String test, String createdTime, String reviewId, Review review) {
         this.id = id;
         this.test = test;
         this.createdTime = createdTime;
         this.reviewId = reviewId;
+        this.review = review;
     }
 
     public Comment() {

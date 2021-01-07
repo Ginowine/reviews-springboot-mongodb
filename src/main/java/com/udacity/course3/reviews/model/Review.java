@@ -26,7 +26,7 @@ public class Review {
     @JsonProperty
     private Product product;
 
-    @ManyToMany
+    @OneToMany
     @JsonProperty
     @Column
     private List<Comment> comments;

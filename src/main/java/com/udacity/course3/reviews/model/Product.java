@@ -23,9 +23,6 @@ public class Product {
     @JsonIgnore
     private List<Review> review;
 
-    public Product(){
-
-    }
     public Product(String productId, String productName, double productAmt){
         this.productId = productId;
         this.productName = productName;
@@ -37,6 +34,10 @@ public class Product {
         this.productName = productName;
         this.productAmt = productAmount;
         this.review = review;
+    }
+
+    public Product() {
+
     }
 
     @Override
