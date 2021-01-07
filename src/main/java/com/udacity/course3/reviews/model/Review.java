@@ -1,35 +1,29 @@
 package com.udacity.course3.reviews.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Document(collection = "reviews")
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty
-    @Column
     private String id;
 
-    @Column
     private String reviewerName;
-    @Column
+
     private String reviewerDescription;
-    @Column
+
     private String reviewerTitle;
-    @Column
+
     private String createdDate;
 
     @ManyToOne
-    @JsonProperty
     private Product product;
 
     @OneToMany
-    @JsonProperty
-    @Column
     private List<Comment> comments;
 
     public Review(String id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, Product product, List<Comment> comments) {

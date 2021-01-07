@@ -1,24 +1,20 @@
 package com.udacity.course3.reviews.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Document(collection = "comments")
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty
     private Long id;
     private String test;
     private String createdTime;
     private String reviewId;
 
     @ManyToOne
-    @JsonProperty
-    @Column
     private Review review;
 
     public Comment(Long id, String test, String createdTime, String reviewId, Review review) {
