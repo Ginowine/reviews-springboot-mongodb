@@ -27,7 +27,6 @@ public class Review {
     private List<Comment> comments;
 
     public Review(String reviewerName, String reviewerDescription, String reviewerTitle, String date, Product product, List<Comment> comments) {
-        this.id = id;
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;

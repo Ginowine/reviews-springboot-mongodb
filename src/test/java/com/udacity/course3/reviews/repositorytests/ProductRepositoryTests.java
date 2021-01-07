@@ -4,6 +4,7 @@ import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
 import com.udacity.course3.reviews.repositories.ReviewRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
@@ -23,6 +24,11 @@ public class ProductRepositoryTests {
     private ProductRepository productRepository;
     @Autowired
     ReviewRepository reviewRepository;
+
+    @Before
+    public void setUp() throws Exception {
+
+    }
 
     @Test
     public void createProductTest(){

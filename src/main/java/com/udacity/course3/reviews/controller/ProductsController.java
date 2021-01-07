@@ -97,7 +97,7 @@ public class ProductsController {
 
     @RequestMapping(value = "/name", method = RequestMethod.GET)
     public List<Product> findByProductName(@PathVariable("productName") String productName){
-        Iterable<Product> products = productRepository.findProductsByProductName(productName);
+        Iterable<Product> products = productRepository.findProductsByName(productName);
         List<Product> listOfProducts = new ArrayList<>();
         for (Product product : products){
             listOfProducts.add(product);
