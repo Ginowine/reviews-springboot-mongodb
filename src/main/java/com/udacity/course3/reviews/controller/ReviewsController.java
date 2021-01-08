@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.exception.ProductNotFound;
+import com.udacity.course3.reviews.model.Comment;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
@@ -42,7 +43,17 @@ public class ReviewsController {
         if (!existingProduct.isPresent()){
             throw new ProductNotFound("ERROR: NOT_FOUND");
         }else {
-            return reviewRepository.save(review);
+            Review review1 = new Review();
+            review1.setId(review.getId());
+            review1.setReviewerTitle(review.getReviewerTitle());
+            review1.setReviewerName(review.getReviewerName());
+            review1.setReviewerDescription(review.getReviewerDescription());
+            review1.setCreatedDate(review.getCreatedDate());
+
+            List<Comment> comments = review.getComments();
+            review1.setComments(comments);
+
+            return reviewRepository.save(review1);
         }
     }
 
