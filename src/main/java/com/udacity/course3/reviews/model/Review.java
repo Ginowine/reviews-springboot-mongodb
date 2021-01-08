@@ -1,13 +1,8 @@
 package com.udacity.course3.reviews.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.util.List;
 
-@Document(collection = "reviews")
 public class Review {
     @Id
     private String id;
@@ -20,18 +15,14 @@ public class Review {
 
     private String createdDate;
 
-    @ManyToOne
-    private Product product;
-
-    @OneToMany
     private List<Comment> comments;
 
-    public Review(String reviewerName, String reviewerDescription, String reviewerTitle, String date, Product product, List<Comment> comments) {
+    public Review(String id, String reviewerName, String reviewerDescription, String reviewerTitle, String date, List<Comment> comments) {
+        this.id = id;
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;
         this.createdDate = date;
-        this.product = product;
         this.comments = comments;
     }
 

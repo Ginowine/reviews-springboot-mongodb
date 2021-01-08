@@ -1,10 +1,11 @@
 package com.udacity.course3.reviews.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 @Document(collection = "products")
@@ -16,18 +17,19 @@ public class Product {
 
     private double productAmt;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Review> review;
+    private List<Review> reviews;
 
-    public Product(String productName, double productAmt){
+    public Product(String id, String productName, double productAmt){
+        this.productId = id;
         this.productName = productName;
         this.productAmt = productAmt;
     }
 
-    public Product(String productName, double productAmount, List<Review> review) {
+    public Product(String id, String productName, double productAmount, List<Review> reviews) {
+        this.productId = id;
         this.productName = productName;
         this.productAmt = productAmount;
-        this.review = review;
+        this.reviews = reviews;
     }
 
     public Product() {
@@ -36,16 +38,27 @@ public class Product {
 
     @Override
     public String toString() {
-        //return String.format("Product[id=%s, productName='%s', productAmt='%s']", id, productName, productAmt);
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = "";
 
-        final StringBuffer sb = new StringBuffer("Product{");
-        sb.append(", productId=").append(productId);
-        sb.append(", productName=").append(productName);
-        sb.append(", productAmt=").append(productAmt);
-        sb.append(", reviews=").append(review);
-        sb.append('}');
+        try {
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+            jsonString = mapper.writeValueAsString(this);
+        }catch (JsonProcessingException e){
+            e.printStackTrace();
+        }
 
-        return sb.toString();
+        return jsonString;
+
+
+//        final StringBuffer sb = new StringBuffer("Product{");
+//        sb.append(", productId=").append(productId);
+//        sb.append(", productName=").append(productName);
+//        sb.append(", productAmt=").append(productAmt);
+//        sb.append(", reviews=").append(reviews);
+//        sb.append('}');
+//
+//        return sb.toString();
     }
 
     public String getProductId() {
@@ -57,11 +70,11 @@ public class Product {
     }
 
     public List<Review> getReviews() {
-        return review;
+        return reviews;
     }
 
     public void setReviews(List<Review> review) {
-        this.review = review;
+        this.reviews = review;
     }
 
     public String getProductName() {

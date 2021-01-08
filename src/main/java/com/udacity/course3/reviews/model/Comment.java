@@ -1,27 +1,18 @@
 package com.udacity.course3.reviews.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
-@Document(collection = "comments")
 public class Comment {
 
     @Id
     private Long id;
     private String test;
     private String createdTime;
-    private String reviewId;
 
-    @ManyToOne
-    private Review review;
-
-    public Comment(String test, String createdTime, String reviewId, Review review) {
+    public Comment(Long id, String test, String createdTime) {
+        this.id = id;
         this.test = test;
         this.createdTime = createdTime;
-        this.reviewId = reviewId;
-        this.review = review;
     }
 
     public Comment() {
@@ -34,7 +25,6 @@ public class Comment {
         sb.append("id=").append(id);
         sb.append(", test=").append(test);
         sb.append(", createdTime=").append(createdTime);
-        sb.append(", reviewerId=").append(reviewId);
         sb.append('}');
 
         return sb.toString();
@@ -62,13 +52,5 @@ public class Comment {
 
     public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
-    }
-
-    public String getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(String reviewId) {
-        this.reviewId = reviewId;
     }
 }
