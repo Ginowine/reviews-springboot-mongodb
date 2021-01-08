@@ -5,11 +5,11 @@ import javax.persistence.Id;
 public class Comment {
 
     @Id
-    private Long id;
+    private String id;
     private String test;
     private String createdTime;
 
-    public Comment(Long id, String test, String createdTime) {
+    public Comment(String id, String test, String createdTime) {
         this.id = id;
         this.test = test;
         this.createdTime = createdTime;
@@ -29,11 +29,11 @@ public class Comment {
         return sb.toString();
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
