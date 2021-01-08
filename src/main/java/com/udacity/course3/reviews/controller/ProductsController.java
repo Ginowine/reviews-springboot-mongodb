@@ -1,6 +1,5 @@
 package com.udacity.course3.reviews.controller;
 
-import com.udacity.course3.reviews.model.Comment;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repositories.ProductRepository;
@@ -41,16 +40,9 @@ public class ProductsController {
         product1.setProductName(product.getProductName());
         product1.setProductAmt(product.getProductAmt());
 
-        List<Comment> comments = new ArrayList<Comment>();
-        comments.add(new Comment())
-
-
-        Review review = new Review();
-        List<Review> reviews = new ArrayList<Review>();
-        reviews.add(new Review("1.0", "Gino", "good product", "Mr", "23/43/33", product))
-        reviewRepository.save(review);
-
+        List<Review> review = product.getReviews();
         product1.setReviews(review);
+
         productRepository.save(product1);
         return ResponseEntity.ok(product1);
 

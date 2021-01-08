@@ -20,7 +20,6 @@ public class Comment {
 
     @Override
     public String toString() {
-        //return String.format("Comment[id=%s, test='%s', createdTime='%s', revieweId='%s']", id, test, createdTime, reviewId);
         final StringBuffer sb = new StringBuffer("Review{");
         sb.append("id=").append(id);
         sb.append(", test=").append(test);
